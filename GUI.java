@@ -36,6 +36,7 @@ public class GUI extends JFrame implements ActionListener{
 	JToolBar toolbar = new JToolBar(); // create a tool bar
 	JTree tree; // create a tree
 	JScrollPane treeScrollPane; // create a ScrollPane for tree
+	JComponent grid;// right panel
 	/*
 	 * GUI Constructor
 	 */
@@ -208,12 +209,12 @@ public class GUI extends JFrame implements ActionListener{
      */
     private void createJPanel(){
 
-        JComponent grid = new JPanel(); // create right panel
+        grid = new JPanel(); // create right panel
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT); // create a split pane
         splitPane.setLeftComponent(treeScrollPane);
         splitPane.setRightComponent(grid);
         
-    	grid.setBackground(Color.gray);
+//    	grid.setBackground(Color.gray);
         add(splitPane, BorderLayout.CENTER);
     }
     
@@ -236,7 +237,7 @@ public class GUI extends JFrame implements ActionListener{
 			System.exit(0);
 		}
 		if (command.equals("CLEAR")) {
-			System.exit(0);
+			
 		}
 		if (command.equals("FIND")) {
 			System.exit(0);
@@ -251,7 +252,24 @@ public class GUI extends JFrame implements ActionListener{
 			System.exit(0);
 		}
 		if (command.equals("CLASS")) {
-			System.exit(0);
+			JPanel panel = new JPanel();
+	        JTextField textField = new JTextField(10);
+	        panel.add(new JLabel("Name: "));
+	        panel.add(textField);
+	        
+	       while(true){
+	    	   String input = JOptionPane.showInputDialog(panel,"Name");
+	    	   if(input.length() == 0){
+		    	   JPanel panelWarning = new JPanel();  
+		           JOptionPane.showMessageDialog(panelWarning,"Please enter your class name","Alert",JOptionPane.WARNING_MESSAGE);
+	    	   }else{
+	    		   JLabel text = new JLabel(input);
+	    		   grid.add(text);
+	    		   break;
+	    	   }
+	    	   
+	    	   
+	       }
 		}
 		if (command.equals("INTERFACE")) {
 			System.exit(0);
@@ -266,8 +284,9 @@ public class GUI extends JFrame implements ActionListener{
 			System.exit(0);
 		}
 		if (command.equals("ZOOM_IN")) {
-			System.exit(0);
+			
 		}
+		
 		if (command.equals("ZOOM_OUT")) {
 			System.exit(0);
 		}
