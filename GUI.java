@@ -10,8 +10,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -252,24 +255,60 @@ public class GUI extends JFrame implements ActionListener{
 			System.exit(0);
 		}
 		if (command.equals("CLASS")) {
-			JPanel panel = new JPanel();
-	        JTextField textField = new JTextField(10);
-	        panel.add(new JLabel("Name: "));
-	        panel.add(textField);
-	        
-	       while(true){
-	    	   String input = JOptionPane.showInputDialog(panel,"Name");
-	    	   if(input.length() == 0){
-		    	   JPanel panelWarning = new JPanel();  
-		           JOptionPane.showMessageDialog(panelWarning,"Please enter your class name","Alert",JOptionPane.WARNING_MESSAGE);
-	    	   }else{
-	    		   JLabel text = new JLabel(input);
-	    		   grid.add(text);
-	    		   break;
-	    	   }
-	    	   
-	    	   
-	       }
+			
+			JTextField xField = new JTextField(10);
+
+		      JPanel myPanel = new JPanel();
+
+		      // add text field
+		      myPanel.add(new JLabel("Name :"));
+		      myPanel.add(xField);
+		      myPanel.add(Box.createHorizontalStrut(10)); // a spacer
+		      
+		      // add radio button
+		      JRadioButton defaultButton = new JRadioButton("default");
+		      myPanel.add(defaultButton);
+		      JRadioButton publicButton = new JRadioButton("public");
+		      myPanel.add(publicButton);
+		      ButtonGroup buttonGroup = new ButtonGroup();
+		      buttonGroup.add(defaultButton);
+		      buttonGroup.add(publicButton);
+		      
+		      // add check box
+		      ButtonGroup checkboxGroup = new ButtonGroup();
+		      JCheckBox abstractCheckbox = new JCheckBox("abstract");
+		      checkboxGroup.add(abstractCheckbox);
+		      JCheckBox addmoreCheckbox = new JCheckBox("add more");
+		      checkboxGroup.add(addmoreCheckbox);
+		      myPanel.add(abstractCheckbox);
+		      myPanel.add(addmoreCheckbox);
+		      
+		      
+		      
+		      
+		      while(true){
+		    	  String a = xField.getText();
+		    	  JPanel panelWarning = new JPanel();
+			      int result = JOptionPane.showConfirmDialog(null, myPanel, 
+			               "Enter class name", JOptionPane.OK_CANCEL_OPTION);
+			      if (result == JOptionPane.OK_OPTION) {
+			    	 if(a.length() == 0 || buttonGroup.getSelection() == null || checkboxGroup.getSelection() == null){
+			    		   
+				         JOptionPane.showMessageDialog(panelWarning,"Please enter class information","Alert",JOptionPane.WARNING_MESSAGE);
+				         continue;
+			    	 }
+			    	 
+			    	 else{
+			    		 break;
+			    	 }
+			    	
+			         
+			      }else{
+			    	  break;
+			      }
+			      
+			      
+		      }
 		}
 		if (command.equals("INTERFACE")) {
 			System.exit(0);
